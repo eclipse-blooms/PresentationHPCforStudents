@@ -48,7 +48,7 @@ Port: 22
 
 ##### Alternativ: Jetbrains Toolbox
 
-#### VS-Code etc. unterstützen Remote development auch, siehe entsprechende Dokumentation
+##### VS-Code etc. unterstützen Remote development auch, siehe entsprechende Dokumentation
 
 
 ## Hinweise zur Nutzung gemeinsamer GPU Resourcen
@@ -109,5 +109,12 @@ erneuert sich die Ausgabe alle paar Sekunden automatisch. Das macht es einfach i
 nvtop
 ```
 
-Startet eine Anwendung in der Konsole, die noch detailliertere Informationen zu laufenden Prozessen ausgibt. Hier findet sich u.a. auch der Nutzer, der den Prozess gestartet hat. Falls ein Nutze viele tote Prozesse hat, die Vram verschwenden kann and diesen so eine freundliche E-Mail geschrieben werden.
+Startet eine Anwendung in der Konsole, die noch detailliertere Informationen zu laufenden Prozessen ausgibt. Hier findet sich u.a. auch der Nutzer, der den Prozess gestartet hat. 
+
+Der Befehl
+```
+finger <Benutzername>
+```
+
+liefert Details über einen Nutzer. Falls ein Nutzer viele tote Prozesse hat, die V-Ram verschwenden kann and diesen so eine freundliche E-Mail geschrieben werden.
 

@@ -10,7 +10,7 @@ Siehe auch in der [offiziellen Doku](https://doc.nhr.fau.de/account/).
 
 Läuft grundsätzlich über Professoren an der OTH, d.h. Studenten haben ohne Einladung keinen Zugang. 
 
-ANSPRECHPARTNER??
+Ansprechpartner sind hier grundsätzlich die Professoren, die für euer Projekt zuständig sind.
 
 ## Verbindungsaufbau und Node Struktur
 
@@ -45,17 +45,31 @@ Nun ist eine Verbindung zu den Clustern möglich. Deren SSH Adressen sind [hier]
 
 ### Slurm und Jobs
 
-https://slurm.schedmd.com/overview.html
+Das NHR nutzt [Slurm](https://slurm.schedmd.com/overview.html) um Rechenresourcen auf dem Cluster zu verwalten. Über Slurm kann Zugriff zu einer Node angefragt werden, die dem Nutzer dann für einen bestimmten Zeitraum exklusiv zur Verfügung steht.
 
+Um ein Script auf einem der GPUs auszuführen (etwa um ein Modell zu trainieren), kann es mit 
+```
+sbatch [optionen] <jobscript>
+```
 
+Eine interaktive Session kann mit
 
-mit job verbinden
+```
+salloc [optionen]
+```
+
+gestartet werden. Diese erlaubt über die Konsole direkten Zugang zur zugewiesen Node und eignet sich damit für Tests, Debugging usw.
+
+Um in einem anderen Konsolenfenster auf einen interaktiven Job zuzugreifen kann
+
 ```
 srun --jobid=<jobID> --overlap --pty /bin/bash -l
 ```
+verwendet werden.
+
+Wenn der interaktive job vor Ablauf der Zeit nicht mehr gebraucht wird, sollte er mit `exit` beendet werden.
 
 
-TODO
 
 #### Wichtiger Hinweis zu IDEs
 
@@ -87,10 +101,19 @@ erforderlich.
 
 ### Venv
 
-Ein virtual environment wird am einfachsten mit Conda erstellt
+Als Erstes die [Initialisierungsschritte in der offiziellen Doku](https://doc.nhr.fau.de/environment/python-env/) befolgen.
 
-TODO
+Ein virtual environment wird am einfachsten mit Conda erstellt.
 
+```
+conda create -n <env. name> python=<py. version>
+```
+
+Wie mit Conda gewohnt muss es dann jedes Mal for dem start eines Jobs oder zu beginn einer interaktiven Session aktiviert werden.
+
+```
+conda activate <my_env_name_here>
+```
 
 #### IDEs
 
@@ -103,39 +126,29 @@ Problem: Debugserver muss auf der Node gestartet werden um zu funktionieren, das
 
 #### Konfiguration
 
-Folgende Runconfig für den Debug Server in Pycharm anlegen.
+Runconfig für den Debug-Server in PyCharm anlegen mit 
+```
+Hostname: 0.0.0.0
+Port: 5678
+```
+Falls der Port belegt ist einen anderen ausprobieren. Dann die Anweisungen in PyCharm befolgen, um pydevd-pycharm zu installieren und das Skript mit dem Debug-Server zu verbinden.
 
-<img src="Screenshot 2026-01-19 214913.png" alt="drawing" width="7500"/>
 
-Wie im screenshot zu sehen
-```
-pip install pydevd-pycharm~=
-```
 
-Folgendes Snippet in den code
-```
-pydevd_pycharm.settrace(
-    host="127.0.0.1",
-    port=5678,
-    stdout_to_server=True,
-    stderr_to_server=True,
-    suspend=True
-)
-```
 
 #### Debugger Starten
 
 
 
-0. Node allozieren, Module laden, venv starten
+##### 0. Node allozieren, Module laden, venv starten
 ```
 salloc --gres=gpu:a40:1 --time=3:00:00
 module add python
-module add conda
+conda activate <my_env_name_here>
 ```
 
 
-1. SSH Tunnel aufbauen 
+##### 1. SSH Tunnel aufbauen 
 
 
 __Dieser Prozess muss in einem neuen Konsolenfenster gestartet werden, da er NICHT auf der Node laufen soll.__
@@ -146,7 +159,8 @@ ssh -N -R 5678:localhost:5678 <UserName>@<Node>
 `<Username>` ist der FAU Username. `<Node>`
 
 
-2. Debug Server starten
+##### 2. Debug Server starten
+(via PyCharm)
 
-
-3. Script starten
+##### 3. Script starten
+(Per Befehl in der Konsole auf der Node, nicht in PyCharm)

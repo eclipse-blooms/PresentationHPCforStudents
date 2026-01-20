@@ -11,7 +11,7 @@ from tqdm import tqdm
 in_channels   = 3
 num_classes   = 10
 num_workers   = 8
-batch_size    = 256 #this is pretty large for the actual model we use here, but not unreasonable in other usecases
+batch_size    = 1024 #this is pretty large for the actual model we use here, but not unreasonable in other usecases
 num_epochs    = 15
 learning_rate = 0.005
 
