@@ -1,11 +1,11 @@
 # Was ist KIGS
 
-OTH interner KI-GPU Server mit 4 RTX 6000 GPUs mit je 50GB Vram. Alle Nutzer haben vollen geteilten Zugriff auf die GPUs. Infos auch im [ELO-Kurs](https://elearning.oth-regensburg.de/course/view.php?id=4786).
+OTH interner KI-GPU Server mit 4 RTX 6000 GPUs mit je 50GB Memory. Alle Nutzer haben vollen geteilten Zugriff auf die GPUs. Infos auch im [ELO-Kurs](https://elearning.oth-regensburg.de/course/view.php?id=4786).
 
 
 ## Verbindungsaufbau zu KIGS
 
-1. VPN Verbindung aufbauen ([FortiClient](https://rzwww.oth-regensburg.de/supportwiki/doku.php?id=en:public:netz:vpn-forticlient)0
+1. VPN Verbindung aufbauen ([FortiClient](https://rzwww.oth-regensburg.de/supportwiki/doku.php?id=en:public:netz:vpn-forticlient)) (Falls nicht bereits im OTH Netzwerk)
 
 2. Folgenden Befehl in die Konsole eingeben:
 
@@ -92,7 +92,6 @@ beendet werden.
 Der einfachste Befehl um schnell die GPU Auslastung auf KIGS zu überprüfen ist
 ```
 nvidia-smi
-
 ```
 
 So ist es einfach festzustellen, welche GPUs grade frei sind.
