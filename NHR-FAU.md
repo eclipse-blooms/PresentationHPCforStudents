@@ -69,7 +69,7 @@ verwendet werden.
 
 Wenn der interaktive job vor Ablauf der Zeit nicht mehr gebraucht wird, sollte er mit `exit` beendet werden.
 
-
+Details zu diesen Befehlen gibt es [hier](https://doc.nhr.fau.de/batch-processing/batch_system_slurm/).
 
 #### Wichtiger Hinweis zu IDEs
 
